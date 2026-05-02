@@ -1,12 +1,15 @@
 .env
+.git
+.gitignore
 __pycache__/
 *.pyc
-.venv/
-venv/
 .pytest_cache/
 .agent/
 AGENTS.md
 GAME-PLAN.md
 implementation_plan.md
 research_analysis.md
+test_app.py
+requirements-dev.txt
 .code-review-graph/
+README.md
