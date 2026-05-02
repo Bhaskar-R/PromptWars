@@ -12,3 +12,8 @@ research_analysis.md
 test_app.py
 requirements-dev.txt
 .code-review-graph/
+DESIGN.md
+stitch_teamsync_ai_aistandup/
+stitch_teamsync_ai_dashboard/
+stitch_teamsync_ai_teamanalytics/
+Team Collaboration Tool Deep Dive.md

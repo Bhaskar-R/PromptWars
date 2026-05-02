@@ -7,15 +7,20 @@ Falls back to in-memory storage if Firestore is unavailable.
 import uuid
 from typing import Any, Optional
 
+import streamlit as st
+
 from config import GOOGLE_CLOUD_PROJECT
 
 # Collection name constant
 TASKS_COLLECTION: str = "tasks"
 
 
+@st.cache_resource
 def _get_firestore_client() -> Any:
-    """Lazy initialization of Firestore client.
+    """Singleton Firestore client via st.cache_resource.
 
+    Created once per app lifecycle, preventing thousands of connections
+    from Streamlit's rerun-on-every-interaction model.
     Returns None if Firestore is unavailable (local dev without credentials).
     """
     try:
@@ -77,3 +82,36 @@ def delete_task(task_id: str) -> bool:
         return True
     except Exception:
         return False
+
+
+# --- Team Members Persistence ---
+TEAM_COLLECTION: str = "settings"
+TEAM_DOC_ID: str = "team_members"
+
+
+def save_team_members(members: list[str]) -> bool:
+    """Persist team member list to Firestore."""
+    client = _get_firestore_client()
+    if client is None:
+        return False
+    try:
+        client.collection(TEAM_COLLECTION).document(TEAM_DOC_ID).set(
+            {"members": members}
+        )
+        return True
+    except Exception:
+        return False
+
+
+def get_team_members() -> list[str] | None:
+    """Load team member list from Firestore. Returns None if unavailable."""
+    client = _get_firestore_client()
+    if client is None:
+        return None
+    try:
+        doc = client.collection(TEAM_COLLECTION).document(TEAM_DOC_ID).get()
+        if doc.exists:
+            return doc.to_dict().get("members", [])
+        return None
+    except Exception:
+        return None

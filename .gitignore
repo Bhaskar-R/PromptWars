@@ -1,12 +1,31 @@
+# Environment and secrets
 .env
+
+# Python bytecode
 __pycache__/
 *.pyc
+*.pyo
+
+# Virtual environments
 .venv/
 venv/
+
+# Testing
 .pytest_cache/
+
+# Agent/IDE internal
 .agent/
 AGENTS.md
 GAME-PLAN.md
 implementation_plan.md
 research_analysis.md
+
+# Code review graph
 .code-review-graph/
+
+# Design artifacts (HTML mockups from Google Stitch)
+stitch_teamsync_ai_aistandup/
+stitch_teamsync_ai_dashboard/
+stitch_teamsync_ai_teamanalytics/
+DESIGN.md
+Team Collaboration Tool Deep Dive.md
