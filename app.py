@@ -124,6 +124,39 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
 [data-testid="stMetricLabel"] { font-size: 13px !important; font-weight: 500 !important; color: #464554 !important; }
 [data-testid="stMetricValue"] { font-size: 36px !important; font-weight: 700 !important; letter-spacing: -0.02em; color: #111827 !important; }
 .stPlotlyChart { border-radius: 8px; overflow: hidden; }
+
+/* Force light-mode buttons */
+.stButton > button {
+    background-color: #ffffff !important;
+    color: #111827 !important;
+    border: 1px solid #c7c4d7 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 500 !important;
+    border-radius: 6px !important;
+}
+.stButton > button:hover {
+    background-color: #f3f4f6 !important;
+    border-color: #6366f1 !important;
+    color: #6366f1 !important;
+}
+.stButton > button:active, .stButton > button:focus {
+    background-color: #e0e7ff !important;
+    color: #6366f1 !important;
+    border-color: #6366f1 !important;
+}
+
+/* Force light-mode selectbox/inputs */
+[data-baseweb="select"] > div { background-color: #ffffff !important; color: #111827 !important; }
+[data-baseweb="input"] > div { background-color: #ffffff !important; color: #111827 !important; }
+.stTextInput > div > div > input { background-color: #ffffff !important; color: #111827 !important; }
+.stSelectbox > div > div { background-color: #ffffff !important; color: #111827 !important; }
+
+/* Force light sidebar */
+[data-testid="stSidebar"] { background-color: #ffffff !important; }
+[data-testid="stSidebar"] * { color: #111827 !important; }
+
+/* Expander light mode */
+[data-testid="stExpander"] { background-color: #ffffff !important; border: 1px solid #c7c4d7 !important; border-radius: 8px !important; }
 </style>
 """
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
@@ -185,8 +218,16 @@ def _plotly_layout() -> dict:
     return dict(
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
-        font=dict(family="Inter", color=COLOR_ON_SURFACE, size=13),
-        margin=dict(t=40, b=40, l=40, r=20),
+        font=dict(family="Inter", color=COLOR_ON_SURFACE, size=14),
+        margin=dict(t=40, b=60, l=60, r=20),
+        xaxis=dict(
+            title_font=dict(size=14, color=COLOR_ON_SURFACE),
+            tickfont=dict(size=13, color=COLOR_ON_SURFACE),
+        ),
+        yaxis=dict(
+            title_font=dict(size=14, color=COLOR_ON_SURFACE),
+            tickfont=dict(size=13, color=COLOR_ON_SURFACE),
+        ),
     )
 
 
